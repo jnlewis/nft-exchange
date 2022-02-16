@@ -1,1 +1,1 @@
-# nft-exchange
+# NFT Exchange

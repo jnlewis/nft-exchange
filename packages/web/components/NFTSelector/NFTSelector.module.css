@@ -1,0 +1,24 @@
+.card {
+  margin: 10px;
+}
+
+.cardImage {
+  height: 250px;
+  object-fit: cover;
+}
+
+.cardBody {
+  text-align: center;
+}
+
+.cardTitle {
+  font-weight: bold;
+}
+
+.cardSubtitle {
+  color: #888;
+}
+
+.cardDescription {
+
+}

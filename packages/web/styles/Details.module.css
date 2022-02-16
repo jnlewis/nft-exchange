@@ -1,0 +1,28 @@
+
+.content {
+  margin-top: 70px;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.infoContainer {
+  margin: 20px;
+}
+
+.buttonContainer {
+  margin-top: 20px;
+}
+
+.image {
+  width: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #888;
+}

@@ -1,0 +1,107 @@
+.wrapper {
+  display: flex;
+  box-shadow: 0px 1px 0px #efefef;
+  margin-bottom: 25px;
+  padding: 0 0 15px 0;
+
+  @media (max-width: 768px) {
+    display: block;
+    padding: 0;
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 11%);
+    border: 1px solid #f2f2f2;
+    border-radius: 8px;
+  }
+}
+
+.mediaImageWrapper {
+  margin: 0 20px 10px 0;
+  width: 260px;
+  flex: 20%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+}
+
+.mediaImage {
+  height: 150px;
+  width: 260px;
+  object-fit: cover;
+  margin: 0;
+  border-radius: 8px;
+  display: inline-block;
+
+  @media (max-width: 768px) {
+      width: 100%;
+      border-radius: 0px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+  }
+}
+
+.content {
+  flex: 80%;
+
+  @media (max-width: 768px) {
+    height: auto;
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.title {
+  font-family: 'Nunito';
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  color: #2c2c2c;
+  margin: 15px 0px;
+  margin-bottom: 0px;
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 22px;
+  color: #999999;
+}
+
+.description {
+  color: #636c7e;
+  font-size: 14px;
+  line-height: 26px;
+  overflow: hidden;
+}
+
+.actionBar {
+  margin-top: 20px;
+}
+
+.acceptButton {
+  cursor: pointer;
+  color: #2cb0d9;
+  border: solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+}
+.acceptButton:hover {
+  color: white;
+  background-color: #2cb0d9;
+}
+
+.rejectButton {
+  cursor: pointer;
+  color: #d92c2c;
+  border: solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+}
+.rejectButton:hover {
+  color: white;
+  background-color: #d92c2c;
+}
+
+.link {
+  color: #19bfb8;
+}

@@ -1,0 +1,31 @@
+.content {
+  margin-top: 70px;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.infoContainer {
+  margin-left: 10px;
+  padding-left: 30px;
+  border-left: solid 4px #e3e3e3;
+}
+
+.buttonContainer {
+  margin-top: 20px;
+}
+
+.image {
+  height: 200px;
+  width: 200px;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  color: #888;
+}

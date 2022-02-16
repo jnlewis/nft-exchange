@@ -1,0 +1,19 @@
+{
+  "name": "near-nft-exchange",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "asp",
+    "build": "asb",
+    "login": "near login",
+    "deploy": "yarn build && near deploy --accountId exchange.jeffreylewis.testnet --wasmFile build/release/near-nft-exchange.wasm",
+    "deploy:dev": "yarn build && near dev-deploy --wasmFile build/release/near-nft-exchange.wasm",
+    "deploy:notworking": "yarn build && near deploy"
+  },
+  "author": "Jeffrey Lewis",
+  "license": "ISC",
+  "devDependencies": {
+    "near-sdk-as": "^3.2.3"
+  }
+}
