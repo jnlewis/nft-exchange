@@ -23,9 +23,19 @@
 
 .title {
   font-weight: bold;
-  margin-bottom: 30px;
 }
 
 .subtitle {
   color: #888;
+}
+
+.user {
+  font-size: 14px;
+  line-height: 24px;
+  color: #888;
+  padding-left: 20px;
+}
+
+.dashboard {
+  margin-top: 30px;
 }

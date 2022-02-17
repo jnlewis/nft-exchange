@@ -126,13 +126,13 @@ const Details: NextPage = (props: any) => {
                     </Accordion.Item>
                   </Accordion>
 
-                  {listingDetails.seller == currentUser.accountId && (
+                  {listingDetails.seller == currentUser?.accountId && (
                     <div className='mt-4'>
                       <Alert variant="primary">This listing is posted by you.</Alert>
                     </div>
                   )}
 
-                  {listingDetails.seller != currentUser.accountId && (
+                  {listingDetails.seller != currentUser?.accountId && (
                     <div className={styles.buttonContainer}>
                       <Button variant="primary" onClick={() => setShowMakeOfferDialog(true)}>Make An Offer</Button>
                       <Button variant="outline-primary">Contact Seller</Button>

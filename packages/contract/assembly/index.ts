@@ -13,7 +13,6 @@ export function createListing(tokenContract: string, tokenId: string, lookingFor
     const sellerAddress = context.sender;
 
     //TODO: Verify token ownership
-    // Currently handled within token transfer call below
     // isTokenOwner(tokenContract, tokenId, sellerAddress);
 
     // Verify that token is not already listed
@@ -23,7 +22,9 @@ export function createListing(tokenContract: string, tokenId: string, lookingFor
         return;
     }
 
-    // TODO: Transfer token ownership to exchange contract as escrow
+    // Transfer token ownership to exchange contract as escrow
+    // Currently this has to be done outside of exchange contract as predecessor (this contract)
+    // does not own the NFT and cannot initiate transfers
     // transferNftToken(tokenContract, tokenId, EXCHANGE_CONTRACT_ID);
     
     // Generate new listing ID
@@ -65,8 +66,7 @@ export function cancelListing(tokenContract: string, tokenId: string): void {
         return;
     }
 
-    // TODO:
-    // Refund the listing token
+    // TODO: Refund the listing token
     // transferNftToken(listing.tokenContract, listing.tokenId, listing.seller);
     
     // Remove the listing
@@ -84,7 +84,6 @@ export function makeOffer(tokenContract: string, tokenId: string, listingTokenCo
     const buyerAddress = context.sender;
 
     //TODO: Verify token ownership
-    // Currently handled within token transfer call below.
     // isTokenOwner(tokenContract, tokenId, buyerAddress);
 
     // Verify that the listing token is actually on listing
@@ -101,8 +100,9 @@ export function makeOffer(tokenContract: string, tokenId: string, listingTokenCo
         return;
     }
 
-    // TODO:
     // Transfer token ownership to exchange contract as escrow
+    // Currently this has to be done outside of exchange contract as predecessor (this contract)
+    // does not own the NFT and cannot initiate transfers
     // transferNftToken(tokenContract, tokenId, buyerAddress);
     
     // Generate new offer ID
@@ -153,8 +153,7 @@ export function cancelOffer(tokenContract: string, tokenId: string): void {
         return;
     }
     
-    //TODO: 
-    // Refund the offerred token
+    //TODO: Refund the offerred token
     // transferNftToken(offer.offerTokenContract, offer.offerTokenId, offer.buyer);
     
     // Remove the offer
@@ -289,8 +288,6 @@ export function getOffer(tokenContract: string, tokenId: string): OfferInfo | nu
 //     });
 //     return result;
 // }
-
-// FOR TESTING CROSS CONTRACT CALLS
 
 export function transferNftToken(tokenContract: string, tokenId: string, toAccountId: string): void {
     let api = new NFTContractApi();

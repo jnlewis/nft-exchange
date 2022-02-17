@@ -95,12 +95,13 @@ const CreateListing: NextPage = (props: any) => {
         <Container className={styles.content}>
           <Row>
             <h1 className={styles.title}>Create New Listing</h1>
+            {currentUser && (<span className={styles.user}>Logged in as {currentUser.accountId}</span>)}
           </Row>
           {!currentUser && (
             <div><p>Please connect your account.</p></div>
           )}
           {currentUser && (
-            <Row>
+            <Row className={styles.dashboard}>
               <Col lg={4} md={6} xs={12}>
                 <NFTSelector contract={nftContract} accountId={currentUser?.accountId} tokenSelected={(token?: TokenDetails) => handleTokenSelected(token)} />
               </Col>
