@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import styles from './AccountNavigation.module.css';
 
@@ -13,26 +14,28 @@ const AccountNavigation = ({ activeMenu }: AccountNavigationProps) => {
   return (
     <ul className="nav nav-tabs" id="myTab" role="tablist">
       <li className="nav-item">
-        <a
-          className={listingsLinkClassName}
-          data-toggle="tab"
-          href="/account/listings"
-          role="tab"
-          aria-selected="false"
-        >
-          Listings
-        </a>
+        <Link href="/account/listings">
+          <a
+            className={listingsLinkClassName}
+            data-toggle="tab"
+            role="tab"
+            aria-selected="false"
+          >
+            Listings
+          </a>
+        </Link>
       </li>
       <li className="nav-item">
-        <a
-          className={offersLinkClassName}
-          data-toggle="tab"
-          href="/account/offers"
-          role="tab"
-          aria-selected="false"
-        >
-          Offers
-        </a>
+        <Link href="/account/offers">
+          <a
+            className={offersLinkClassName}
+            data-toggle="tab"
+            role="tab"
+            aria-selected="false"
+          >
+            Offers
+          </a>
+        </Link>
       </li>
     </ul>
   );

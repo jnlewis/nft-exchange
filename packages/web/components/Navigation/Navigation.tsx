@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import styles from './Navigation.module.css';
@@ -37,10 +38,10 @@ const Navigation = ({
       {currentUser && (
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            <a className={styles.linkItemBold} href="/account/listings">Account</a>
+            <Link href="/account/listings"><a className={styles.linkItemBold}>Account</a></Link>
           </Navbar.Text>
           <Navbar.Text>
-            <a className={styles.linkItem} href="/listing/create">Create Listing</a>
+            <Link href="/listing/create"><a className={styles.linkItem}>Create Listing</a></Link>
           </Navbar.Text>
           <Navbar.Text>
             <a className={styles.linkItem} onClick={() => signOut()}>Logout</a>

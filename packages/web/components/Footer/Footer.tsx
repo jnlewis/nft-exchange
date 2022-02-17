@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from './Footer.module.css';
@@ -13,7 +14,7 @@ const Footer = () => {
             <p className={styles.appDescription}>NFT Exchange is a digital marketplace that lets you trade NFTs with a community of collectors. Put your token up for trade and start receiving offers.</p>
             <div className={styles.label}>Connect with us</div>
             <p>
-              <a className={styles.link} target="_blank" href="https://github.com/jnlewis/nft-exchange" rel="noreferrer">Find us on Github</a>
+              <Link href="https://github.com/jnlewis/nft-exchange"><a className={styles.link} target="_blank" rel="noreferrer">Find us on Github</a></Link>
             </p>
           </Col>
           <Col lg={8} md={8}>
@@ -22,22 +23,22 @@ const Footer = () => {
                 <Col lg={4} md={4}>
                   <b>Marketplace</b>
                   <ul className={styles.list}>
-                    <li><a className={styles.link} href="/#explore">Explore</a></li>
-                    <li><a className={styles.link} href="/listing/create">Create Listing</a></li>
+                    <li><Link href="/#explore"><a className={styles.link}>Explore</a></Link></li>
+                    <li><Link href="/listing/create"><a className={styles.link}>Create Listing</a></Link></li>
                   </ul>
                 </Col>
                 <Col lg={4} md={4}>
                   <b>My Account</b>
                     <ul className={styles.list}>
-                    <li><a className={styles.link} href="/account/listings">My Listings</a></li>
-                    <li><a className={styles.link} href="/account/offers">My Offers</a></li>
-                    <li><a className={styles.link} href="/account/offers">Incoming Offers</a></li>
+                    <li><Link href="/account/listings"><a className={styles.link}>My Listings</a></Link></li>
+                    <li><Link href="/account/offers"><a className={styles.link}>My Offers</a></Link></li>
+                    <li><Link href="/account/offers"><a className={styles.link}>Incoming Offers</a></Link></li>
                   </ul>
                 </Col>
                 <Col lg={4} md={4}>
                   <b>Platform</b>
                   <ul className={styles.list}>
-                    <li><a className={styles.link} href="https://github.com/jnlewis/nft-exchange">About</a></li>
+                    <li><Link href="https://github.com/jnlewis/nft-exchange"><a className={styles.link}>About</a></Link></li>
                   </ul>
                 </Col>
               </Row>
