@@ -9,9 +9,10 @@ export class NFTContractApi {
    */
    transfer(tokenContract: string, tokenId: string, toAccountId: string): ContractPromise {
     const yoctoNEAR: u128 = u128.One;
+    // const gas: number = 300000000000000; // 300 TGas
 
     let args: TransferArgs = { token_id: tokenId, receiver_id: toAccountId, memo: "transfer ownership" };
-    let promise = ContractPromise.create<TransferArgs>(tokenContract, "nft_transfer", args, 3000000000000, yoctoNEAR);  // Need to attach exactly 1 yoctoNEAR (https://docs.near.org/docs/tutorials/contracts/nfts/approvals)
+    let promise = ContractPromise.create<TransferArgs>(tokenContract, "nft_transfer", args, 300000000000000, yoctoNEAR);  // Need to attach exactly 1 yoctoNEAR (https://docs.near.org/docs/tutorials/contracts/nfts/approvals)
     logging.log("Call NFT_CONTRACT (" + tokenContract + "): nft_transfer");
     return promise;
   }

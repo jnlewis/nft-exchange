@@ -49,7 +49,7 @@ export function createListing(tokenContract: string, tokenId: string, lookingFor
 }
 
 /**
- * Cancel an open listing. Invoker must be the seller of this listing.
+ * Cancel an open listing. Caller must be the seller of this listing.
  */
 export function cancelListing(tokenContract: string, tokenId: string): void {
     
@@ -66,8 +66,8 @@ export function cancelListing(tokenContract: string, tokenId: string): void {
         return;
     }
 
-    // TODO: Refund the listing token
-    // transferNftToken(listing.tokenContract, listing.tokenId, listing.seller);
+    // Refund the listing token
+    transferNftToken(listing.tokenContract, listing.tokenId, listing.seller);
     
     // Remove the listing
     removeListing(tokenContract, tokenId);
@@ -77,7 +77,6 @@ export function cancelListing(tokenContract: string, tokenId: string): void {
 
 /**
  * Makes an offer for an NFT listing, providing an NFT token as the offer item.
- * Invoked by: Creator of an offer
  */
 export function makeOffer(tokenContract: string, tokenId: string, listingTokenContract: string, listingTokenId: string, tokenMeta: TokenMeta): void {
     
@@ -135,8 +134,7 @@ export function makeOffer(tokenContract: string, tokenId: string, listingTokenCo
 }
 
 /**
- * Cancel an open offer. Invoker must be the creator/buyer of this offer.
- * Invoked by: Creator of an offer
+ * Cancel an open offer. Caller must be the creator/buyer of this offer.
  */
 export function cancelOffer(tokenContract: string, tokenId: string): void {
     
@@ -153,8 +151,8 @@ export function cancelOffer(tokenContract: string, tokenId: string): void {
         return;
     }
     
-    //TODO: Refund the offerred token
-    // transferNftToken(offer.offerTokenContract, offer.offerTokenId, offer.buyer);
+    //Refund the offerred token
+    transferNftToken(offer.offerTokenContract, offer.offerTokenId, offer.buyer);
     
     // Remove the offer
     removeOffer(tokenContract, tokenId);
@@ -163,8 +161,7 @@ export function cancelOffer(tokenContract: string, tokenId: string): void {
 }
 
 /**
- * Accept an open offer and performs the exchange transaction by transferring the offered NFT to the seller and the listed NFT to the offerer.
- * Invoked by: Seller of listing
+ * Accept an offer and executes the exchange transaction. Caller must be the seller of the listing.
  */
  export function acceptOffer(tokenContract: string, tokenId: string): void {
     
@@ -188,11 +185,11 @@ export function cancelOffer(tokenContract: string, tokenId: string): void {
         return;
     }
 
-    //TODO: Transfer the offer token to the listing seller
-    // transferNftToken(offer.offerTokenContract, offer.offerTokenId, listing.seller);
+    //Transfer the offer token to the listing seller
+    transferNftToken(offer.offerTokenContract, offer.offerTokenId, listing.seller);
 
-    //TODO: Transfer the listing token to the offerer
-    // transferNftToken(listing.tokenContract, listing.tokenId, offer.buyer);
+    //Transfer the listing token to the offerer
+    transferNftToken(listing.tokenContract, listing.tokenId, offer.buyer);
 
     // Remove the listing
     removeListing(tokenContract, tokenId);
@@ -237,6 +234,9 @@ function removeOffer(tokenContract: string, tokenId: string): void {
 
 // VIEW METHODS
 
+/**
+ * Gets all open listings.
+ */
 export function getListings(): ListingInfo[] {
     const result = new Array<ListingInfo>(listingsStorage.length);
     for(let i = 0; i < listingsStorage.length; i++) {
@@ -245,6 +245,9 @@ export function getListings(): ListingInfo[] {
     return result;
 }
 
+/**
+ * Gets a single listing.
+ */
 export function getListing(tokenContract: string, tokenId: string): ListingInfo | null {
 
     for(let i = 0; i < listingsStorage.length; i++) {
@@ -256,6 +259,9 @@ export function getListing(tokenContract: string, tokenId: string): ListingInfo 
     return null;
 }
 
+/**
+ * Gets all open offers.
+ */
 export function getOffers(): OfferInfo[] {
     const result = new Array<OfferInfo>(offersStorage.length);
     for(let i = 0; i < offersStorage.length; i++) {
@@ -264,6 +270,9 @@ export function getOffers(): OfferInfo[] {
     return result;
 }
 
+/**
+ * Gets a single offer.
+ */
 export function getOffer(tokenContract: string, tokenId: string): OfferInfo | null {
 
     for(let i = 0; i < offersStorage.length; i++) {

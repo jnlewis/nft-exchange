@@ -20,4 +20,4 @@ near call exchange.$ID cancelListing '{"tokenContract": "'nft.$ID'", "tokenId": 
 near call exchange.$ID cancelListing '{"tokenContract": "'nft.$ID'", "tokenId": "9"}' --accountId $BOBID --deposit 0.1
 
 # Cancel offers
-near call exchange.$ID cancelOffer '{"tokenContract": "'nft.$ID'", "tokenId": "4"}' --accountId $ALICEID --deposit 0.1
+near call exchange.$ID cancelOffer '{"tokenContract": "'nft.$ID'", "tokenId": "9"}' --accountId $BOBID --deposit 0.1

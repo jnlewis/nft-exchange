@@ -87,18 +87,18 @@ This is a pre-alpha version of the application. The smart contracts are deployed
 git clone https://github.com/jnlewis/nft-exchange.git
 ```
 
-2. Build and deploy the Exchange contract
+2. Deploy the sample NFT Contract
+```
+From project root:
+> cd packages/contract-nft
+> ... TODO
+```
+
+2. Build and deploy the Exchange Contract
 ```
 > cd packages/contract
 > yarn
 > yarn deploy:dev
-```
-
-2. Build and deploy the NFT contract
-```
-From root:
-> cd packages/contract-nft
-> ... TODO
 ```
 
 3. Mint some testing NFTs
@@ -129,13 +129,17 @@ From root:
 ## Interacting With the Contracts
 
 ##### Exchange Contract Functions
-| Function      | Description                                                                                                                                 |
-|---------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| CreateListing | Creates a listing of an NFT token making it available for receiving offers.                                                                 |
-| MakeOffer     | Makes an offer for an NFT listing, providing an NFT token as the offer item.                                                                |
-| AcceptOffer   | Accept an open offer and performs the exchange transaction by transferring the offered NFT to the seller and the listed NFT to the offerer. |
-| CancelOffer   | Cancel an open offer. Invoker must be the offerer of this offer.                                                                            |
-| CancelListing | Cancel an open listing. Invoker must be the seller of this listing.                                                                         |
+| Function      | Description                                                                 | Change/View | Example |
+|---------------|-----------------------------------------------------------------------------|-------------|---------|
+| CreateListing | Creates a listing of an NFT token making it available for receiving offers. | Change      |         |
+| CancelListing | Cancels a listing. Caller must be the creator of this listing.              | Change      |         |
+| MakeOffer     | Makes an offer for a listing, providing an NFT token as the offer item.     | Change      |         |
+| CancelOffer   | Cancels an offer. Caller must be the creator of this offer.                 | Change      |         |
+| AcceptOffer   | Accept an offer and executes the exchange transaction.                      | Change      |         |
+| getListings   | Gets all open listings.                                                     | View        |         |
+| getListing    | Gets a single listing.                                                      | View        |         |
+| getOffers     | Gets all open offers.                                                       | View        |         |
+| getOffer      | Gets a single offer.                                                        | View        |         |
 
 // TODO: combine into above table
 createListing(tokenContract: string, tokenId: string, lookingFor: string, tokenMeta: TokenMeta)

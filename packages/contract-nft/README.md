@@ -1,57 +1,55 @@
-## NFT Contract
+## NFT Contract Sample
 
-This package contains only the build output from the official NFT sample contract from https://github.com/near-examples/NFT
-We are using is as an example to create tests NFTs for testing and development of NFT Exchange.
+This package contains only the build output from the official NEAR NFT example contract from https://github.com/near-examples/NFT.
+We are using this to create dummy NFTs for testing and development of NFT Exchange.
 
-### Deployment & Initialization (Development Environment)
+See [README](https://github.com/jnlewis/nft-exchange) for setup instructions.
+
+### Usage Instructions
+#### Deploying to Development Environment
 
 1. Open a new terminal.
 
-2. 
+2. Deploy the contract to a development account. Account ID will be automatically generated.
 ```
 near dev-deploy --wasmFile res/non_fungible_token.wasm
 ```
 
-3. 
+3. Set the environment variable of the development account.
 ```
 source neardev/dev-account.env
 echo $CONTRACT_NAME
 ```
 
-4. 
+4. Initialize the NFT contract and verify.
 ```
 near call $CONTRACT_NAME new_default_meta '{"owner_id": "'$CONTRACT_NAME'"}' --accountId $CONTRACT_NAME
+near view $CONTRACT_NAME nft_metadata
 ```
 
-5. near view $CONTRACT_NAME nft_metadata
-
-### Deployment & Initialization (Testnet)
+#### Deploying to Testnet
 
 1. Open a new terminal.
 
-2. 
+2. Set the environment variable of the testnet account.
 ```
-export NFTID=nft.jeffreylewis.testnet
-```
-
-3. 
-```
-near deploy --wasmFile res/non_fungible_token.wasm --accountId $NFTID
+export ID=jeffreylewis.testnet
 ```
 
-4. 
+3. Deploy the contract to the testnet account.
 ```
-near call $NFTID new_default_meta '{"owner_id": "'$NFTID'"}' --accountId $NFTID
-```
-
-5. 
-```
-near view $NFTID nft_metadata
+near deploy --wasmFile res/non_fungible_token.wasm --accountId nft.$ID
 ```
 
-### Minting & Transferring
+4. Initialize the NFT contract and verify.
+```
+near call nft.$ID new_default_meta '{"owner_id": "'nft.$ID'"}' --accountId nft.$ID
+near view nft.$ID nft_metadata
+```
 
-1. 
+#### Minting & Transferring
+
+1. Set the environment variable of the testnet account.
 ```
 export ID=jeffreylewis.testnet
 ```
