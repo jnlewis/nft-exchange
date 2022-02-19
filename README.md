@@ -47,7 +47,7 @@ NFT Exchange is a digital marketplace that lets you trade non-fungible tokens (N
 ## Technologies
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/jnlewis/nft-exchange/main/docs/images/diagram-architecture.png" alt="Process">
+    <img width="600px" src="https://raw.githubusercontent.com/jnlewis/nft-exchange/main/docs/images/diagram-architecture.jpg" alt="Process">
 </p>
 
 **Web Application (UX)**
