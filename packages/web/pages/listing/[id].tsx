@@ -55,7 +55,7 @@ const Details: NextPage = (props: any) => {
     try {
 
       if (listingDetails) {
-        await addOffer(contract, {
+        await addOffer(contract, nftContract, {
           listingId: listingDetails.id,
           listingTokenContract: listingDetails.tokenContract,
           listingTokenId: listingDetails.tokenId,

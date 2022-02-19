@@ -18,10 +18,21 @@ interface AddOfferOptions {
   offerer: string;
 }
 
-export const addOffer = async (contract: any, options: AddOfferOptions) => {
+export const addOffer = async (contract: any, nftContract: any, options: AddOfferOptions) => {
   try {
     console.log("addOffer", "Begin", options);
     
+    // Transfer token to exchange contract
+    await nftContract.nft_transfer(
+      { 
+        token_id: options.offerTokenId,
+        receiver_id: Config.exchangeContractName,
+        memo: 'transfer ownership'
+      },
+      Config.gasFee,
+      0
+    )
+
     // Create offer in contract
     let response = await contract.makeOffer(
       { 

@@ -58,7 +58,7 @@ const CreateListing: NextPage = (props: any) => {
       if (tokenDetails) {
         setIsLoading(true);
 
-        await addListing(contract, {
+        await addListing(contract, nftContract, {
           tokenContract: tokenDetails.tokenContract,
           tokenId: tokenDetails.tokenId,
           title: tokenDetails.title,

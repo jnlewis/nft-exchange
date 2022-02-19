@@ -11,9 +11,20 @@ interface AddListingOptions {
   lookingFor: string;
 }
 
-export const addListing = async (contract: any, options: AddListingOptions) => {
+export const addListing = async (contract: any, nftContract: any, options: AddListingOptions) => {
   try {
     console.log("addListing", "Begin", JSON.stringify(options));
+
+    // Transfer token to exchange contract
+    await nftContract.nft_transfer(
+      { 
+        token_id: options.tokenId,
+        receiver_id: Config.exchangeContractName,
+        memo: 'transfer ownership'
+      },
+      Config.gasFee,
+      0
+    )
 
     // Create listing in contract
     let response = await contract.createListing(
