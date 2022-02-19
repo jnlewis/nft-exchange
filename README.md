@@ -13,8 +13,6 @@ NFT Exchange is a digital marketplace that lets you trade non-fungible tokens (N
 - [Developer Quick Start](#developer-quick-start)
     - [Project Structure](#project-structure)
     - [Deploying to development environment](#deploying-to-development-environment)
-    - [Deploying to staging environment](#deploying-to-staging-environment)
-    - [Running Unit Tests](#running-unit-tests)
     - [Running Web Application](#running-web-application)
 - [Interacting With the Contracts](#interacting-with-the-contracts)
     - [Exchange Contract functions](#exchange-contract-functions)
@@ -82,75 +80,132 @@ This is a pre-alpha version of the application. The smart contracts are deployed
 
 #### Deploying to development environment
 
+Pre-requisite: [NEAR CLI](https://docs.near.org/docs/tools/near-cli#installation)
 1. Clone the source code from repo
 ```
-git clone https://github.com/jnlewis/nft-exchange.git
+> git clone https://github.com/jnlewis/nft-exchange.git
 ```
 
 2. Deploy the sample NFT Contract
+
 ```
-From project root:
+From the project root folder:
 > cd packages/contract-nft
-> ... TODO
+> near dev-deploy --wasmFile res/non_fungible_token.wasm
+> source neardev/dev-account.env
+> near call $CONTRACT_NAME new_default_meta '{"owner_id": "'$CONTRACT_NAME'"}' --accountId $CONTRACT_NAME
 ```
+*View packages/contract-nft/README.md for explanation of each steps.*
 
 2. Build and deploy the Exchange Contract
 ```
-> cd packages/contract
+From the project root folder:
+> cd packages/contract-exchange
 > yarn
 > yarn deploy:dev
 ```
 
-3. Mint some testing NFTs
-```
-> ./mint.sh
-```
-
-3. Initialize some test listings
-```
-> ./init-listings.sh
-> ./mint.sh
-```
-
-#### Deploying to staging environment
-// TODO
-
-
-#### Running Unit Tests
-
-```
-> cd packages/contract
-> yarn
-> yarn test
-```
+3. See [Interacting With the Contracts](#interacting-with-the-contracts) for directly using the contracts or [Running Web Application](#running-web-application) for setting up the frontend.
 
 #### Running Web Application
 
+1. Starting up the web application locally
+```
+From the project root folder:
+> cd packages/web
+> yarn
+> yarn dev
+```
+
+2. Configuring the web application
+```
+Edit the following files to configure the contract account IDs.
+packages/web/core/config/config.ts (NFT Contract account)
+packages/web/core/config/nearConfig.ts (Exchange Contract account)
+```
+
+3. Browse the application
+```
+Visit http://localhost:3000
+```
+
+2. Mint some testing NFTs (Optional)
+```
+Edit the file ./packages/scripts/init-nft-mint.sh to configure the environment variables (first few lines)
+From the project root folder:
+> chmod +x ./packages/scripts/init-nft-mint.sh
+> ./packages/scripts/init-nft-mint.sh
+```
+
+3. Create some test listings (Optional)
+```
+Edit the file ./packages/scripts/init-nft-listings.sh to configure the environment variables (first few lines)
+From the project root folder:
+> chmod +x ./packages/scripts/init-exchange-listings.sh
+> ./packages/scripts/init-exchange-listings.sh
+```
+
 ## Interacting With the Contracts
 
+View the files `/packages/scripts/exchange-utils.sh` and `/packages/scripts/nft-utils.sh` for preset examples of interacting with the contracts.
+
 ##### Exchange Contract Functions
-| Function      | Description                                                                 | Change/View | Example |
-|---------------|-----------------------------------------------------------------------------|-------------|---------|
-| CreateListing | Creates a listing of an NFT token making it available for receiving offers. | Change      |         |
-| CancelListing | Cancels a listing. Caller must be the creator of this listing.              | Change      |         |
-| MakeOffer     | Makes an offer for a listing, providing an NFT token as the offer item.     | Change      |         |
-| CancelOffer   | Cancels an offer. Caller must be the creator of this offer.                 | Change      |         |
-| AcceptOffer   | Accept an offer and executes the exchange transaction.                      | Change      |         |
-| getListings   | Gets all open listings.                                                     | View        |         |
-| getListing    | Gets a single listing.                                                      | View        |         |
-| getOffers     | Gets all open offers.                                                       | View        |         |
-| getOffer      | Gets a single offer.                                                        | View        |         |
+| Function      | Description                                                                 | Change/View |
+|---------------|-----------------------------------------------------------------------------|-------------|
+| CreateListing | Creates a listing of an NFT token making it available for receiving offers. | Change      |
+| CancelListing | Cancels a listing. Caller must be the creator of this listing.              | Change      |
+| MakeOffer     | Makes an offer for a listing, providing an NFT token as the offer item.     | Change      |
+| CancelOffer   | Cancels an offer. Caller must be the creator of this offer.                 | Change      |
+| AcceptOffer   | Accept an offer and executes the exchange transaction.                      | Change      |
+| getListings   | Gets all open listings.                                                     | View        |
+| getListing    | Gets a single listing.                                                      | View        |
+| getOffers     | Gets all open offers.                                                       | View        |
+| getOffer      | Gets a single offer.                                                        | View        |
 
-// TODO: combine into above table
+**Function Interface**
+```
 createListing(tokenContract: string, tokenId: string, lookingFor: string, tokenMeta: TokenMeta)
-
 cancelListing(tokenContract: string, tokenId: string)
-
 makeOffer(tokenContract: string, tokenId: string, listingTokenContract: string, listingTokenId: string, tokenMeta: TokenMeta)
-
 cancelOffer(tokenContract: string, tokenId: string)
-
 acceptOffer(tokenContract: string, tokenId: string)
+
+getListings(): ListingInfo[]
+getListing(tokenContract: string, tokenId: string): ListingInfo
+getOffers(): OfferInfo[] 
+getOffer(tokenContract: string, tokenId: string): OfferInfo
+```
+
+**Models**
+```
+class ListingInfo {
+  listingId: i32;
+  seller: string;
+  tokenContract: string;
+  tokenId: string;
+  lookingFor: string;
+  tokenMeta: TokenMeta;
+}
+
+class OfferInfo {
+  offerId: i32;
+  buyer: string;
+  offerTokenContract: string;
+  offerTokenId: string;
+  offerTokenMeta: TokenMeta;
+  listingId: i32;
+  seller: string;
+  listingTokenContract: string;
+  listingTokenId: string;
+  listingTokenMeta: TokenMeta;
+}
+
+class TokenMeta {
+  title: string;
+  description: string;
+  image: string;
+}
+```
 
 ## Screenshots
 
